@@ -1,29 +1,23 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System; // Required for InvalidOperationException
 
-// TODO Problem 2 - Write and run test cases and fix the code to match requirements.
+// The PriorityQueue class should NOT be defined here. 
+// It lives in its own file in the same project.
 
 [TestClass]
 public class PriorityQueueTests
 {
     [TestMethod]
-    // Scenario: 
-    // Expected Result: 
-    // Defect(s) Found: 
-    public void TestPriorityQueue_1()
+    // Scenario: Test if the highest priority is actually removed.
+    // Expected Result: "High" (Pri: 5)
+    // Defect(s) Found: Fixed - loop now reaches the end of the list.
+    public void TestPriorityQueue_HighestPriority()
     {
         var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
+        priorityQueue.Enqueue("Low", 1);
+        priorityQueue.Enqueue("High", 5);
+        Assert.AreEqual("High", priorityQueue.Dequeue());
     }
 
-    [TestMethod]
-    // Scenario: 
-    // Expected Result: 
-    // Defect(s) Found: 
-    public void TestPriorityQueue_2()
-    {
-        var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
-    }
-
-    // Add more test cases as needed below.
+    // ... your other tests go here ...
 }
