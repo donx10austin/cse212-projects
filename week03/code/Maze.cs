@@ -4,11 +4,11 @@ public class Maze
     private int _currX;
     private int _currY;
 
-    public Maze(Dictionary<(int, int), bool[]> mazeMap, int startX, int startY)
+    public Maze(Dictionary<(int, int), bool[]> mazeMap)
     {
         _mazeMap = mazeMap;
-        _currX = startX;
-        _currY = startY;
+        _currX = 1;
+        _currY = 1;
     }
 
     // Index 0 = Left, 1 = Right, 2 = Up, 3 = Down
@@ -20,6 +20,10 @@ public class Maze
         {
             _currX -= 1;
         }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     public void MoveRight()
@@ -27,6 +31,10 @@ public class Maze
         if (_mazeMap[(_currX, _currY)][1])
         {
             _currX += 1;
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
         }
     }
 
@@ -36,6 +44,10 @@ public class Maze
         {
             _currY += 1;
         }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     public void MoveDown()
@@ -44,8 +56,12 @@ public class Maze
         {
             _currY -= 1;
         }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     // Optional: Add a way to get the current position for testing
-    public (int, int) GetStatus() => (_currX, _currY);
+    public string GetStatus() => $"Current location (x={_currX}, y={_currY})";
 }
