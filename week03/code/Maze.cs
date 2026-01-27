@@ -1,67 +1,31 @@
 public class Maze
 {
     private readonly Dictionary<(int, int), bool[]> _mazeMap;
-    private int _currX;
-    private int _currY;
+    private int _currX = 1;
+    private int _currY = 1;
 
     public Maze(Dictionary<(int, int), bool[]> mazeMap)
     {
         _mazeMap = mazeMap;
-        _currX = 1;
-        _currY = 1;
     }
 
     // Index 0 = Left, 1 = Right, 2 = Up, 3 = Down
-    
-    public void MoveLeft()
+    public void MoveLeft() { if (CanMove(0)) _currX--; }
+    public void MoveRight() { if (CanMove(1)) _currX++; }
+    public void MoveUp() { if (CanMove(2)) _currY--; }
+    public void MoveDown() { if (CanMove(3)) _currY++; }
+
+    private bool CanMove(int directionIndex)
     {
-        // Check if movement is possible from current position
-        if (_mazeMap[(_currX, _currY)][0])
-        {
-            _currX -= 1;
-        }
-        else
-        {
-            throw new InvalidOperationException("Can't go that way!");
-        }
+        return _mazeMap.ContainsKey((_currX, _currY)) && _mazeMap[(_currX, _currY)][directionIndex];
     }
 
-    public void MoveRight()
+    /// <summary>
+    /// Returns the current location as a string. 
+    /// This resolves the CS1061 error in your test file.
+    /// </summary>
+    public string GetStatus()
     {
-        if (_mazeMap[(_currX, _currY)][1])
-        {
-            _currX += 1;
-        }
-        else
-        {
-            throw new InvalidOperationException("Can't go that way!");
-        }
+        return $"({_currX}, {_currY})";
     }
-
-    public void MoveUp()
-    {
-        if (_mazeMap[(_currX, _currY)][2])
-        {
-            _currY += 1;
-        }
-        else
-        {
-            throw new InvalidOperationException("Can't go that way!");
-        }
-    }
-
-    public void MoveDown()
-    {
-        if (_mazeMap[(_currX, _currY)][3])
-        {
-            _currY -= 1;
-        }
-        else
-        {
-            throw new InvalidOperationException("Can't go that way!");
-        }
-    }
-
-    // Optional: Add a way to get the current position for testing
-    public string GetStatus() => $"Current location (x={_currX}, y={_currY})";
 }

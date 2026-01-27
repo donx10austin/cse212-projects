@@ -9,7 +9,7 @@ public class FindPairsTests
     [TestMethod]
     public void FindPairs_TwoPairs()
     {
-        var actual = SetsAndMaps.FindPairs(["am", "at", "ma", "if", "fi"]);    
+        var actual = SetsAndMaps.FindPairs(["am", "at", "ma", "if", "fi"]);
         var expected = new[] { "ma & am", "fi & if" };
 
         Assert.AreEqual(expected.Length, actual.Length);
@@ -19,7 +19,7 @@ public class FindPairsTests
     [TestMethod]
     public void FindPairs_OnePair()
     {
-        var actual = SetsAndMaps.FindPairs(["ab", "bc", "cd", "de", "ba"]);    
+        var actual = SetsAndMaps.FindPairs(["ab", "bc", "cd", "de", "ba"]);
         var expected = new[] { "ba & ab" };
 
         Assert.AreEqual(expected.Length, actual.Length);
@@ -279,7 +279,7 @@ public class MazeTests
         catch (Exception e)
         {
             Assert.Fail(
-                 string.Format("Unexpected exception of type {0} caught: {1}", 
+                 string.Format("Unexpected exception of type {0} caught: {1}",
                                 e.GetType(), e.Message)
             );
         }
