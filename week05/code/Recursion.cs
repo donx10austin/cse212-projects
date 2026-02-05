@@ -80,6 +80,7 @@ public static class Recursion
     {
         if (currPath == null) currPath = new List<(int, int)>();
         
+        // Add current position to path
         currPath.Add((x, y));
 
         if (maze.IsEnd(x, y))
@@ -88,6 +89,7 @@ public static class Recursion
         }
         else 
         {
+            // Possible directions: Right, Down, Left, Up
             int[] dx = { 1, 0, -1, 0 };
             int[] dy = { 0, 1, 0, -1 };
 
@@ -96,15 +98,16 @@ public static class Recursion
                 int nextX = x + dx[i];
                 int nextY = y + dy[i];
 
-                if (maze.IsValidMove(currPath, nextX, nextX))
+                // FIXED: Used nextY for the second coordinate instead of nextX
+                if (maze.IsValidMove(currPath, nextX, nextY))
                 {
-                    // Line 105: Parameters MUST stay in this exact order:
-                    // 1: results, 2: maze, 3: int, 4: int, 5: List
+                    // Parameters maintained in required order: results, maze, x, y, currPath
                     SolveMaze(results, maze, nextX, nextY, currPath);
                 }
             }
         }
 
+        // Backtrack: remove the current position before returning to the previous caller
         currPath.RemoveAt(currPath.Count - 1);
     }
 }
